@@ -26,6 +26,10 @@ class SingUpView(views.CreateView):
     success_url = reverse_lazy('account_login')
 
 
+class LogoutView(auth_views.LogoutView):
+    ...
+
+
 class UserView(views.UpdateView):
     model = models.User
     form_class = forms.UserForm
@@ -38,4 +42,3 @@ class UserView(views.UpdateView):
             'first_name': self.request.user.first_name,
             'last_name': self.request.user.last_name,
         }
-
