@@ -1,7 +1,9 @@
 from django.urls import reverse_lazy
 from django.views import generic as views
+from django.views.generic import edit
 from django.contrib.auth import views as auth_views
 
+from . import models
 from . import forms
 
 
@@ -22,3 +24,18 @@ class SingUpView(views.CreateView):
     form_class = forms.SignUpForm
     template_name = 'registration/signup.html'
     success_url = reverse_lazy('account_login')
+
+
+class UserView(views.UpdateView):
+    model = models.User
+    form_class = forms.UserForm
+
+    def get_initial(self):
+        return {
+            'avatar': self.request.user.avatar,
+            'username': self.request.user.get_username(),
+            'email': self.request.user.email,
+            'first_name': self.request.user.first_name,
+            'last_name': self.request.user.last_name,
+        }
+

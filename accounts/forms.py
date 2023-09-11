@@ -12,3 +12,9 @@ class SignUpForm(auth_forms.UserCreationForm):
     class Meta(auth_forms.UserCreationForm.Meta):
         model = models.User
         fields = auth_forms.UserCreationForm.Meta.fields + ('email',)
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = ('avatar', 'username', 'email', 'first_name', 'last_name',)
