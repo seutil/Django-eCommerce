@@ -1,10 +1,11 @@
 from django.urls import reverse_lazy
-from django.contrib.auth import views
+from django.views import generic as views
+from django.contrib.auth import views as auth_views
 
 from . import forms
 
 
-class LoginView(views.LoginView):
+class LoginView(auth_views.LoginView):
     authentication_form = forms.LoginForm
     redirect_authenticated_user = True
 
@@ -15,3 +16,9 @@ class LoginView(views.LoginView):
             self.request.session.modified = True
         
         return super().form_valid(form)
+
+
+class SingUpView(views.CreateView):
+    form_class = forms.SignUpForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('account_login')
