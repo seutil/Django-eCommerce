@@ -11,15 +11,15 @@
     <header>
         <nav class="navbar navbar-expand-md bg-body-tertiary">
             <div class="container-md px-3 px-md-0">
-                <a href="#" class="navbar-brand text-uppercase"><i class="bi bi-houses-fill text-primary"></i> DKEA</a>
+                <a href="{% url 'home' %}" class="navbar-brand text-uppercase"><i class="bi bi-houses-fill text-primary"></i> DKEA</a>
                 <button type="button" class="navbar-toggler" data-bs-target="#navbarContent" data-bs-toggle="collapse" aria-controls="navbarContent" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div id="navbarContent" class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a href="#" class="nav-link">О нас</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">История</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Партнёры</a></li>
+                        <li class="nav-item"><a href="{% url 'home' %}#sectionAboutUs" class="nav-link">О нас</a></li>
+                        <li class="nav-item"><a href="{% url 'home' %}#sectionHistory" class="nav-link">История</a></li>
+                        <li class="nav-item"><a href="{% url 'home' %}#sectionPartners" class="nav-link">Партнёры</a></li>
                         <li class="nav-item"><a href="#" class="nav-link text-primary">Магазин</a></li>
                     </ul>
 
@@ -47,11 +47,11 @@
         <div class="container-md py-5">
             <div class="d-flex justify-content-between">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a href="#" class="nav-link">О нас</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">История</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Партнёры</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}#sectionAboutUs" class="nav-link">О нас</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}#sectionHistory" class="nav-link">История</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}#sectionPartners" class="nav-link">Партнёры</a></li>
                 </ul>
-                <a href="#" class="display-1 text-white text-decoration-none">DKEA</a>
+                <a href="{% url 'home' %}" class="display-1 text-white text-decoration-none">DKEA</a>
             </div>
         </div>
     </footer>

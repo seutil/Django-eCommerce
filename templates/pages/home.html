@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block head_title %}{% endblock %}
 
@@ -20,14 +21,14 @@
         <div class="d-flex gap-2">
             <div class="card w-25 shadow">
                 <div class="card-body text-center">
-                    <img src="media/images/wildberries.jpg" alt="" height="200">
+                    <img src="{% static 'pages/images/wildberries.jpg' %}" alt="" height="200">
                     <h3><a href="https://www.wildberries.ru/" target="_blank" class="text-decoration-none">WILDBRERIES</a></h3>
                     <p class="card-subtitle">Маркетплейс одежды, обуви, электроники</p>
                 </div>
             </div>
             <div class="card w-25 shadow">
                 <div class="card-body text-center">
-                    <img src="media/images/ozon.png" alt="" height="200">
+                    <img src="{% static 'pages/images/ozon.png' %}" alt="" height="200">
                     <h3><a href="https://ozon.ru" target="_blank" class="text-decoration-none">OZON</a></h3>
                     <p class="card-subtitle">Старейший российский универсальный интернет магазин</p>
                 </div>
