@@ -1,7 +1,10 @@
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.shortcuts import redirect
 from django.views import generic as views
 from django.views.generic import edit
 from django.contrib.auth import views as auth_views
+from django.contrib.auth import mixins as auth_mixins
+from django.contrib.auth import get_user_model
 
 from . import models
 from . import forms
@@ -30,7 +33,7 @@ class LogoutView(auth_views.LogoutView):
     ...
 
 
-class UserView(views.UpdateView):
+class UserView(auth_mixins.LoginRequiredMixin, auth_mixins.UserPassesTestMixin, views.UpdateView):
     model = models.User
     form_class = forms.UserForm
 
@@ -42,3 +45,9 @@ class UserView(views.UpdateView):
             'first_name': self.request.user.first_name,
             'last_name': self.request.user.last_name,
         }
+
+    def test_func(self):
+        return self.request.user == get_user_model().objects.get(pk=self.kwargs['pk'])
+
+    def handle_no_permission(self):
+        return redirect(reverse('home'))
