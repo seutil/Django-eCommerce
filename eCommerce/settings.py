@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # Project
     'pages',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / 'static/'
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
