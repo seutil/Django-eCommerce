@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third-party,
+    'widget_tweaks',
+
     # Project
     'pages',
     'accounts',
@@ -142,3 +145,5 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
+
+LOGIN_REDIRECT_URL = 'home'
