@@ -1,7 +1,6 @@
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import redirect
 from django.views import generic as views
-from django.views.generic import edit
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import mixins as auth_mixins
 from django.contrib.auth import get_user_model
@@ -57,3 +56,15 @@ class UserView(auth_mixins.LoginRequiredMixin, auth_mixins.UserPassesTestMixin, 
 
     def handle_no_permission(self):
         return redirect(reverse('home'))
+
+
+class PasswordResetView(auth_views.PasswordResetView):
+    success_url = reverse_lazy('account_password_reset_done')
+
+
+class PasswordResetDoneView(auth_views.PasswordResetDoneView):
+    ...
+
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    success_url = reverse_lazy('account_login')
