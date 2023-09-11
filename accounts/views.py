@@ -33,6 +33,12 @@ class LogoutView(auth_views.LogoutView):
     ...
 
 
+class ChangePasswordView(auth_mixins.LoginRequiredMixin, auth_views.PasswordChangeView):
+
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()
+
+
 class UserView(auth_mixins.LoginRequiredMixin, auth_mixins.UserPassesTestMixin, views.UpdateView):
     model = models.User
     form_class = forms.UserForm
