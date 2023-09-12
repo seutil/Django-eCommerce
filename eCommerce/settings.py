@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Project
     'pages',
     'accounts',
+    'shop',
 ]
 
 MIDDLEWARE = [
