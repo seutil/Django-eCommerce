@@ -38,8 +38,9 @@ class ChangePasswordView(auth_mixins.LoginRequiredMixin, auth_views.PasswordChan
         return self.request.user.get_absolute_url()
 
 
-class UserView(auth_mixins.LoginRequiredMixin, auth_mixins.UserPassesTestMixin, views.UpdateView):
+class UserView(auth_mixins.LoginRequiredMixin, views.FormView):
     model = models.User
+    template_name = 'accounts/user_form.html'
     form_class = forms.UserForm
 
     def get_initial(self):
