@@ -28,11 +28,11 @@
             <h1 class="text-muted">{{ product.name }}</h1>
             <p class="lead">{{ product.price | intcomma }} &#8381;</p>
             <div class="d-flex gap-1">
-                <form action="{% url 'delete_favorite' product.pk %}" method="post" class="form-inline">
+                <form action="{% url 'add_to_cart' product.pk %}" method="post">
                     {% csrf_token %}
-                    <button type="button" class="btn btn-outline-warning" formaction="#" formmethod="post"><i class="bi bi-cart-check-fill"></i></button>                                
+                    <button type="button" class="btn btn-outline-warning"><i class="bi bi-cart-check-fill"></i></button>                                
                 </form>
-                <form action="{% url 'add_favorite' product.pk %}" method="post" class="form-inline">
+                <form action="{% url 'add_favorite' product.pk %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-outline-danger"><i class="bi bi-heart-fill"></i></button>
                 </form>
