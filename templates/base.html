@@ -8,53 +8,55 @@
     <title>DKEA &dash; {% block head_title %}{% endblock %}</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-md bg-body-tertiary">
-            <div class="container-md px-3 px-md-0">
-                <a href="{% url 'home' %}" class="navbar-brand text-uppercase"><i class="bi bi-houses-fill text-primary"></i> DKEA</a>
-                <button type="button" class="navbar-toggler" data-bs-target="#navbarContent" data-bs-toggle="collapse" aria-controls="navbarContent" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div id="navbarContent" class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto">
+    <div class="vh-100 d-flex flex-column">
+        <header>
+            <nav class="navbar navbar-expand-md bg-body-tertiary">
+                <div class="container-md px-3 px-md-0">
+                    <a href="{% url 'home' %}" class="navbar-brand text-uppercase"><i class="bi bi-houses-fill text-primary"></i> DKEA</a>
+                    <button type="button" class="navbar-toggler" data-bs-target="#navbarContent" data-bs-toggle="collapse" aria-controls="navbarContent" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="navbarContent" class="collapse navbar-collapse">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item"><a href="{% url 'home' %}#sectionAboutUs" class="nav-link">О нас</a></li>
+                            <li class="nav-item"><a href="{% url 'home' %}#sectionHistory" class="nav-link">История</a></li>
+                            <li class="nav-item"><a href="{% url 'home' %}#sectionPartners" class="nav-link">Партнёры</a></li>
+                            <li class="nav-item"><a href="{% url 'products' %}" class="nav-link text-primary">Магазин</a></li>
+                        </ul>
+    
+                        {% if user.is_authenticated %}
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item"><a href="{% url 'favorites' %}" class="nav-link"><i class="bi bi-heart-fill text-danger"></i> Изрбанное</a></li>
+                                <li class="nav-item"><a href="{% url 'cart' %}" class="nav-link"><i class="bi bi-basket-fill text-primary"></i> Корзина</a></li>
+                                <li class="nav-item"><a href="{% url 'account_detail' %}" class="nav-link"><i class="bi bi-person-circle"></i> Аккаунт</a></li>
+                            </ul>
+                        {% else %}
+                            <div class="d-flex gap-1">
+                                <a href="{% url 'account_signup' %}" class="btn btn-primary btn-sm">Зарегистрироваться</a>
+                                <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-sm">Войти</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="container-md py-5 flex-grow-1">
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer class="bg-dark">
+            <div class="container-md py-5">
+                <div class="d-flex justify-content-between">
+                    <ul class="nav flex-column">
                         <li class="nav-item"><a href="{% url 'home' %}#sectionAboutUs" class="nav-link">О нас</a></li>
                         <li class="nav-item"><a href="{% url 'home' %}#sectionHistory" class="nav-link">История</a></li>
                         <li class="nav-item"><a href="{% url 'home' %}#sectionPartners" class="nav-link">Партнёры</a></li>
-                        <li class="nav-item"><a href="{% url 'products' %}" class="nav-link text-primary">Магазин</a></li>
                     </ul>
-
-                    {% if user.is_authenticated %}
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a href="{% url 'favorites' %}" class="nav-link"><i class="bi bi-heart-fill text-danger"></i> Изрбанное</a></li>
-                            <li class="nav-item"><a href="{% url 'cart' %}" class="nav-link"><i class="bi bi-basket-fill text-primary"></i> Корзина</a></li>
-                            <li class="nav-item"><a href="{% url 'account_detail' %}" class="nav-link"><i class="bi bi-person-circle"></i> Аккаунт</a></li>
-                        </ul>
-                    {% else %}
-                        <div class="d-flex gap-1">
-                            <a href="{% url 'account_signup' %}" class="btn btn-primary btn-sm">Зарегистрироваться</a>
-                            <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-sm">Войти</a>
-                        </div>
-                    {% endif %}
+                    <a href="{% url 'home' %}" class="display-1 text-white text-decoration-none">DKEA</a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <main class="container-md py-5">
-        {% block content %}
-        {% endblock %}
-    </main>
-    <footer class="bg-dark">
-        <div class="container-md py-5">
-            <div class="d-flex justify-content-between">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a href="{% url 'home' %}#sectionAboutUs" class="nav-link">О нас</a></li>
-                    <li class="nav-item"><a href="{% url 'home' %}#sectionHistory" class="nav-link">История</a></li>
-                    <li class="nav-item"><a href="{% url 'home' %}#sectionPartners" class="nav-link">Партнёры</a></li>
-                </ul>
-                <a href="{% url 'home' %}" class="display-1 text-white text-decoration-none">DKEA</a>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     {% block end_scripts %}{% endblock %}
 </body>
