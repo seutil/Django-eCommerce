@@ -22,7 +22,7 @@ class DeleteFavoriteView(auth_mixins.LoginRequiredMixin, views.View):
     def post(self, request, product_pk):
         models.FavoriteProduct.objects.filter(
             user=request.user,
-            product=product_pk,
+            product=shop_models.Product.objects.get(pk=product_pk),
         ).delete()
         return redirect(reverse('favorites'))
 
