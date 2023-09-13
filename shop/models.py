@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from django.contrib.auth import get_user_model
 
 
 class Category(models.Model):
@@ -59,3 +60,12 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = 'Фотография продукта'
         verbose_name_plural = 'Фотографии продуктов'
+
+
+class UserFavoriteProducts(models.Model):
+    user = models.ForeignKey(get_user_model(), models.CASCADE, related_name='favorite', verbose_name='Пользователь')
+    product = models.ForeignKey(Product, models.CASCADE, related_name='favorite', verbose_name='Продукт')
+
+    class Meta:
+        verbose_name = 'Израбранный товар'
+        verbose_name_plural = 'Избранные товары'
