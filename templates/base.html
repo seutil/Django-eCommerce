@@ -20,7 +20,7 @@
                         <li class="nav-item"><a href="{% url 'home' %}#sectionAboutUs" class="nav-link">О нас</a></li>
                         <li class="nav-item"><a href="{% url 'home' %}#sectionHistory" class="nav-link">История</a></li>
                         <li class="nav-item"><a href="{% url 'home' %}#sectionPartners" class="nav-link">Партнёры</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link text-primary">Магазин</a></li>
+                        <li class="nav-item"><a href="{% url 'products' %}" class="nav-link text-primary">Магазин</a></li>
                     </ul>
 
                     {% if user.is_authenticated %}
@@ -56,5 +56,6 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    {% block end_scripts %}{% endblock %}
 </body>
 </html>
