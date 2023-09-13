@@ -27,6 +27,7 @@ class ManufactureAdmin(admin.ModelAdmin):
 
 class ProductImagesInline(admin.TabularInline):
     model = models.ProductImage
+    extra = 1
 
 
 @admin.register(models.Product)
