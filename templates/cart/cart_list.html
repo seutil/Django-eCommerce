@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load pages_tags %}
 
 {% block head_title %}Корзина{% endblock %}
 
@@ -17,23 +18,7 @@
         <div class="col-10">
             {% if cart %}
                 {% for item in cart %}
-                    {% with product=item.product %}
-                        <div class="card w-50">
-                            <div class="card-header bg-transparent text-center">
-                                <img src="{{ product.images.all.first.image.url }}" alt="" height="200">
-                            </div>
-                            <div class="card-body">
-                                <a href="#" class="card-title fs-6">{{ product.name }}</a>
-                                <p class="card-text text-truncate">{{ product.price }} &#8381;</p>
-                            </div>
-                            <div class="card-footer">
-                                <form action="{% url 'delete_from_cart' product.pk %}" method="post">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-outline-danger"><i class="bi bi-cart-dash-fill"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    {% endwith %}
+                    {% get_product_card item.product 50 %}
                 {% endfor %}
             {% else %}
                 <p class="text-center text-muted">Похоже на то, что вы ещё не положили ни одного товара в коризну</p>
