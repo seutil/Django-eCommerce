@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 
 
 class Category(models.Model):
@@ -45,6 +46,15 @@ class ProductImage(models.Model):
     title = models.CharField('Заголовок', max_length=100, null=True, blank=True)
     image = models.ImageField('Изображение', upload_to='product/')
     product = models.ForeignKey(Product, models.CASCADE, related_name='images', verbose_name='Продукт')
+
+    def get_title(self):
+        return self.title or '(Нет заголовка)'
+
+    def get_image(self):
+        return mark_safe(f'<img src="{self.image.url}" alt="{self.title}" height="150">')
+
+    get_title.short_description = 'Заголовок'
+    get_image.short_description = 'Изображение'
 
     class Meta:
         verbose_name = 'Фотография продукта'
