@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block head_title %}Изрбанные товары{% endblock %}
+
+{% block content %}
+    <h1 class="display-1 text-muted">Избранные товары</h1>
+    {% if favorite_products %}
+        <div class="d-flex flex-column row-gap-3 align-items-center">
+            {% for favorite_product in favorite_products %}
+                {% with product=favorite_product.product %}
+                    <div class="card w-75">
+                        <div class="card-header bg-transparent text-center">
+                            <img src="{{ product.images.all.first.image.url }}" alt="" height="200">
+                        </div>
+                        <div class="card-body">
+                            <a href="{% url 'product' product.pk %}" class="card-title fs-6">{{ product.name }}</a>
+                            <p class="card-text text-truncate">{{ product.price | intcomma }} &#8381;</p>
+                        </div>
+                        <div class="card-footer d-flex gap-1">
+                            <form action="#" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-warning"><i class="bi bi-cart-check-fill"></i></button>
+                            </form>
+                            <form action="{% url 'delete_favorite' product.pk %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger"><i class="bi bi-heartbreak-fill"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Кажется вы ещё не добавили ни одного товара в избранное</p>
+    {% endif %}
+{% endblock %}
