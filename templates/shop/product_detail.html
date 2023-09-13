@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block head_title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-4">
+            <div id="productImages" class="carousel slide">
+                <div class="carousel-inner">
+                    {% for product_image in product.images.all %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                            <img src="{{ product_image.image.url }}" alt="" class="d-block w-100">
+                        </div>
+                    {% endfor %}
+                    <button type="button" class="carousel-control-prev" data-bs-target="#productImages" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previouse</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#productImages" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h1 class="text-muted">{{ product.name }}</h1>
+            <p class="lead">{{ product.price | intcomma }} &#8381;</p>
+            <div>
+                <button type="button" class="btn btn-outline-warning" formaction="#" formmethod="post"><i class="bi bi-cart-check-fill"></i></button>
+                <button type="button" class="btn btn-outline-danger" formaction="#" formmethod="post"><i class="bi bi-heart-fill"></i></button>
+            </div>
+        </div>
+    </div>
+    <section>
+        <h2 class="text-muted">Описание</h2>
+        <p>
+            {% if product.description %}
+                {{ product.description }}
+            {% else %}
+                Автор пока что не предоставил описания &#128532;
+            {% endif %}
+        </p>
+    </section>
+{% endblock %}

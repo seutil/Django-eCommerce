@@ -64,7 +64,7 @@
                             <img src="{{ product.images.all.first.image.url }}" alt="" height="200">
                         </div>
                         <div class="card-body">
-                            <a href="#" class="card-title fs-6">{{ product.name }}</a>
+                            <a href="{% url 'product' product.pk %}" class="card-title fs-6">{{ product.name }}</a>
                             <p class="card-text text-truncate">{{ product.price | intcomma }} &#8381;</p>
                         </div>
                         <div class="card-footer">

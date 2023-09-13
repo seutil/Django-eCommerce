@@ -33,3 +33,7 @@ class ProductsView(views.ListView):
             queryset = queryset.filter(manufacture__in=manufactors)
 
         return queryset
+
+
+class ProductView(views.DetailView):
+    model = models.Product
