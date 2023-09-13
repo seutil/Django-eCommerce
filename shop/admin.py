@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
 
 from . import models
 
@@ -16,6 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class ManufactureProductsInline(admin.TabularInline):
     model = models.Product
+    extra = 1
 
 
 @admin.register(models.Manufacture)
@@ -25,21 +25,22 @@ class ManufactureAdmin(admin.ModelAdmin):
     inlines = [ManufactureProductsInline]
 
 
+class ProductImagesInline(admin.TabularInline):
+    model = models.ProductImage
+
+
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'category', 'manufacture')
     list_display_links = ('name',)
     list_filter = ('category', 'manufacture')
     search_fields = ('name', )
+    inlines = [ProductImagesInline]
     save_on_top = True
 
 
 @admin.register(models.ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'get_image')
-    list_display_links = ('title', )
-
-    def get_image(self, obj):
-        return mark_safe(f'<img src="{obj.image.url}" alt="{obj.title}" height="150">')
-
-    get_image.short_description = 'Изображение'
+    list_display = ('get_title', 'get_image', 'product')
+    list_display_links = ('get_title', 'get_image')
+    list_filter = ('product', )
